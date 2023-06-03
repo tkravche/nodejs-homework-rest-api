@@ -1,26 +1,21 @@
-const express = require('express')
-const contactsService = require("../../models/contacts")
-const router = express.Router()
+const express = require("express");
 
-router.get('/', async (req, res, next) => {
-  const result= await contactsService.listContacts();
-  res.json({result});
-})
+const contactsController = require("../../controllers/contacts-controller");
 
-router.get('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+const {validateBody} = require("../../decorators");
 
-router.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+const schemas = require("../../schemas/contacts");
 
-router.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+const contactsRouter = express.Router();
 
-router.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+contactsRouter.get("/", contactsController.getAll)
 
-module.exports = router
+contactsRouter.get("/:id", contactsController.getById)
+
+contactsRouter.post("/", validateBody(schemas.contactAddSchema), contactsController.add)
+
+contactsRouter.put("/:id", validateBody(schemas.contactAddSchema), contactsController.updateById)
+
+contactsRouter.delete("/:id", contactsController.deleteById)
+
+module.exports = contactsRouter;

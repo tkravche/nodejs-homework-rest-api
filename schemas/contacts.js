@@ -1,16 +1,18 @@
 const Joi = require("joi");
 
 const contactAddSchema = Joi.object({
-  name: Joi.string().min(3).max(30).required(),
+  name: Joi.string().min(3).max(30).required().messages({
+    "any.required": `missing required "name" field`,
+  }),
   email: Joi.string()
     .required()
     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
     .messages({
-      "any.required": `"email" must exist`,
+      "any.required": `missing required "email" field`,
     }),
 
   phone: Joi.string().required().messages({
-    "any.required": `"phone" must exist`,
+    "any.required": `missing required "phone" field`,
   }),
 });
 
