@@ -1,4 +1,6 @@
 const { Schema, model } = require("mongoose");
+const {handleMongooseError} = require("../../middlewares")
+
 const contactSchema = new Schema({
   name: {
     type: String,
@@ -14,7 +16,9 @@ const contactSchema = new Schema({
     type: Boolean,
     default: false,
   },
-});
+}, {versionKey: false, timestamps: true});
+
+contactSchema.post("save", handleMongooseError);
 
 const Contact = model("contact", contactSchema);
 module.exports = Contact;
