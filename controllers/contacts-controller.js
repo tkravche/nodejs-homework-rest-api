@@ -19,9 +19,8 @@ const getById = async (req, res) => {
 };
 
 const add = async (req, res) => {
-  const { name, email, phone, favorite } = req.body;
-  console.log(req.body)
-  const result = await Contact.create(name, email, phone, favorite);
+  
+  const result = await Contact.create(req.body);
   res.status(201).json(result);
 };
 

@@ -12,11 +12,11 @@ contactsRouter.get("/", contactsController.getAll)
 
 contactsRouter.get("/:id", isValidId, contactsController.getById)
 
-contactsRouter.post("/",isBodyEmpty, validateBody(schemas.contactAddSchema),  contactsController.add)
+contactsRouter.post("/", isBodyEmpty, validateBody(schemas.contactAddSchema),  contactsController.add)
 
 contactsRouter.put("/:id", isValidId, isBodyEmpty, validateBody(schemas.contactAddSchema), contactsController.updateById)
 
-contactsRouter.patch("/:id/favorite", isValidId, isBodyEmpty, validateBody(schemas.contactUpdateFavoriteSchema),contactsController.updateFavorite)
+contactsRouter.patch("/:id/favorite", isValidId, isBodyEmpty, validateBody(schemas.contactUpdateFavoriteSchema), contactsController.updateFavorite)
 
 contactsRouter.delete("/:id", isValidId, contactsController.deleteById)
 
