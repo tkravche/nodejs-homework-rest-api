@@ -4,6 +4,7 @@ const contactsController = require("../../controllers/contacts-controller");
 const {isValidId} = require("../../middlewares");
 const {validateBody} = require("../../decorators");
 const {isBodyEmpty} = require("../../middlewares");
+const {isBodyEmptyFavorite} = require("../../middlewares");
 const schemas = require("../../schemas/contacts");
 
 const contactsRouter = express.Router();
@@ -16,7 +17,7 @@ contactsRouter.post("/", isBodyEmpty, validateBody(schemas.contactAddSchema),  c
 
 contactsRouter.put("/:id", isValidId, isBodyEmpty, validateBody(schemas.contactAddSchema), contactsController.updateById)
 
-contactsRouter.patch("/:id/favorite", isValidId, isBodyEmpty, validateBody(schemas.contactUpdateFavoriteSchema), contactsController.updateFavorite)
+contactsRouter.patch("/:id/favorite", isValidId, isBodyEmptyFavorite, validateBody(schemas.contactUpdateFavoriteSchema), contactsController.updateStatusContact)
 
 contactsRouter.delete("/:id", isValidId, contactsController.deleteById)
 
