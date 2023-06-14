@@ -1,6 +1,6 @@
 const isBodyEmpty = require("./isBodyEmpty");
 const isBodyEmptyFavorite = require("./isBodyEmptyFavorite");
-const handleMongooseError = require("./handleMongooseError");
+const handleMongooseError = require("../helpers/handleMongooseError");
 const isValidId = require("./isValidId");
 
 module.exports = {
