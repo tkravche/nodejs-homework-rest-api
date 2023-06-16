@@ -14,7 +14,7 @@ authRouter.post("/register", isBodyEmpty, validateBody(userSchemas.userRegisterS
 authRouter.post("/login", isBodyEmpty, validateBody(userSchemas.userLoginSchema), authController.signin)
 authRouter.get("/current", authenticate, authController.getCurrent);
 authRouter.post("/logout",authenticate, authController.logout);
-
+authRouter.patch("/",authenticate, validateBody(userSchemas.userUpdateSchema), authController.subscriptionUpdate);
 module.exports = authRouter;
 
  

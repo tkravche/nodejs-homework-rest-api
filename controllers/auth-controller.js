@@ -66,9 +66,18 @@ const {_id} = req.user;
 await User.findByIdAndUpdate((_id), {token: ""});
 res.status(204).json({message: "No content"})
 }
+
+const subscriptionUpdate = async(req, res)=>{
+  const {subscription } = req.body;
+  const {_id, email,} = req.user;
+  await User.findByIdAndUpdate((_id), {subscription});
+  res.json({ email, subscription });
+  }
+  
 module.exports = {
   signup: ctrlWrapper(signup),
   signin: ctrlWrapper(signin),
   getCurrent: ctrlWrapper(getCurrent),
   logout: ctrlWrapper(logout),
+  subscriptionUpdate: ctrlWrapper(subscriptionUpdate),
 };
