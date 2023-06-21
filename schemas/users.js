@@ -24,13 +24,16 @@ const userLoginSchema = Joi.object({
 });
 
 const userUpdateSchema = Joi.object({
-  subscription: Joi.boolean().valid(...subscriptionList).required().messages({
-  "any.required": `missing required "subscription" field`,
-}),
+  subscription: Joi.boolean()
+    .valid(...subscriptionList)
+    .required()
+    .messages({
+      "any.required": `missing required "subscription" field`,
+    }),
 });
 
 module.exports = {
   userRegisterSchema,
   userLoginSchema,
-  userUpdateSchema
+  userUpdateSchema,
 };

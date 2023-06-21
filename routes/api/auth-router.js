@@ -4,7 +4,7 @@ const authController = require('../../controllers/auth-controller')
 
 const {validateBody} = require("../../decorators");
 
-const {isBodyEmpty, authenticate} = require("../../middlewares");
+const {isBodyEmpty, authenticate, upload} = require("../../middlewares");
 
 const userSchemas = require('../../schemas/users')
 
@@ -15,6 +15,7 @@ authRouter.post("/login", isBodyEmpty, validateBody(userSchemas.userLoginSchema)
 authRouter.get("/current", authenticate, authController.getCurrent);
 authRouter.post("/logout",authenticate, authController.logout);
 authRouter.patch("/",authenticate, validateBody(userSchemas.userUpdateSchema), authController.subscriptionUpdate);
+authRouter.patch("/avatars",authenticate, upload.single("avatar"), authController.avatarUpdate);
 module.exports = authRouter;
 
  

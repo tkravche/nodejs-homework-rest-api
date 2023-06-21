@@ -17,10 +17,10 @@ const limits = {
   fileSize: 1024 * 1024,
 };
 
-const mimetypeWhitelist = ["image/jepg", "image/jpg", "image/png"];
+const mimetypeWhitelist = ["image/jpeg", "image/png"];
 
 const fileFilter = (req, file, cb) => {
-  if (mimetypeWhitelist.includes(file.mimetype)) {
+  if (!mimetypeWhitelist.includes(file.mimetype)) {
     return cb(HttpError(400, "Invalid file format"));
   }
   cb(null, true);
