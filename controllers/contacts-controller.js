@@ -5,16 +5,16 @@ const { ctrlWrapper } = require("../decorators");
 const { HttpError } = require("../helpers");
 
 const getAll = async (req, res) => {
-  const {favorite} = req.query;
+  const { favorite } = req.query;
   const { _id: owner } = req.user;
   const { page = 1, limit = 20 } = req.query;
   const skip = (page - 1) * limit;
-  const dbRequest = favorite !== undefined? {owner, favorite}: {owner};
- 
-  const result = await Contact.find(dbRequest,"-createdAt -updatedAt", { skip, limit }).populate(
-    "owner",
-    "name email"
-  );
+  const dbRequest = favorite !== undefined ? { owner, favorite } : { owner };
+
+  const result = await Contact.find(dbRequest, "-createdAt -updatedAt", {
+    skip,
+    limit,
+  }).populate("owner", "name email");
   res.json(result);
 };
 
@@ -72,4 +72,4 @@ module.exports = {
   updateById: ctrlWrapper(updateById),
   updateStatusContact: ctrlWrapper(updateStatusContact),
   deleteById: ctrlWrapper(deleteById),
-  };
+};
